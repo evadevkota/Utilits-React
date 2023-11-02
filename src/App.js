@@ -1,33 +1,76 @@
 
 import './App.css';
+import About from './components/About';
+import Navbar from './components/Navbar';
+import TextForm  from './components/TextForm';
+import React, {useState} from 'react'
+import Alert from './components/Alerts';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+
+
 
 function App() {
+  const[mode, setMode]=useState('light');
+  const[alert, setAlert]=useState(null);
+  const showAlert=(message,type)=>{
+    setAlert({
+      message:message,
+      type:type
+    })
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+    
+
+  }
+  const toggleMode=()=>{
+    if (mode==="light"){
+      setMode("dark")
+      document.body.style.backgroundColor='#212529'
+      document.body.style.color='white'
+      showAlert("Dark Mode has been enabled","success")
+      setInterval(() => {
+        document.title="Text Utils-Dark Mode"
+      }, 1500);
+    }
+    else{
+      setMode("light")
+      document.body.style.backgroundColor='white'
+      document.body.style.color='black'
+
+      showAlert("Light Mode has been enabled","success")
+      setInterval(() => {
+        document.title="Text Utils-Light Mode"
+      }, 1500);
+    }
+  }
   return (
     
+    
     <>
-   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Text Utils</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/"> About</a>
-        </li>
+     
+     <Router>
+     <Navbar title="Text Utils" about="About Utils" mode={mode} toggleMode={toggleMode}/>
+     < Alert alert={alert}/>
+
+     <div className="container my-3"> 
        
-      </ul>
-      <form class="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+        <Routes>
+            <Route path="/about" element={<About/>}>
+            </Route>
+            <Route path="/home" element={<TextForm heading="Enter text to analyze"  mode={mode} showAlert={showAlert} />}>
+            </Route>
+          </Routes>
+        </div>
+        </Router>
+     
+
+
+
+
+
    </>
   );
 }
