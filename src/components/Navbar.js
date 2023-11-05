@@ -13,7 +13,7 @@ let  navColor={
       return { color: 'black', fontSize:'25px' };
     } else {
       // Set a default style if the mode is not "light" or "yellow"
-      return { color: '"#F9DEC9', fontSize:'25px' };
+      return { color: '#F9DEC9', fontSize:'25px' };
     }
   };
    
