@@ -59,7 +59,7 @@ export default function TextForm(props) {
             <button disabled={text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleUpClick}>Convert to uppercase</button>
             <button disabled={text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleUpLower}>Convert to lowercase</button>
             <button disabled={text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleClear}>Clear</button>
-            <button disabled={text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleCopy}>Copy text</button>
+            <button disabled={text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleCopy}>Copy</button>
 
             <button disabled={text.length === 0} className="btn btn-primary mx-2 my-1" onClick={handleExtraSpaces}>Remove extra spaces</button>
 
